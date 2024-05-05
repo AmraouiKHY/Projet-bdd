@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  content: ["./public/index.html", "./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ["Montserrat", "sans-serif"],
+    },
   },
-  plugins: [require("tailwindcss"), require("autoprefixer")],
+  plugins: [],
 };
-

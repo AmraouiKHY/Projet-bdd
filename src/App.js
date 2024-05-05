@@ -3,7 +3,7 @@ import InventoryForm from './InventoryForm';
 import InventoryList from './InventoryList';
 import { createStore, applyMiddleware } from 'redux';
 import { thunk } from "redux-thunk";
-import './input.css';  // Middleware for asynchronous actions
+import './input.css';  
 
 const initialState = {
   products: [],
@@ -39,8 +39,8 @@ const App = () => {
   store.subscribe(() => setProducts(store.getState().products));
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-black">
-      <h1 className="text-3xl font-bold mb-4">Inventory Management</h1>
+    <div className="mx-auto px-4 py-8 ">
+      <h1 className="text-center text-3xl font-bold mb-4">Inventory Management</h1>
       <InventoryForm onSubmit={submitProduct} />
       <InventoryList products={products} />
     </div>
