@@ -46,7 +46,7 @@ const App = () => {
 
   const submitProduct = (productData) => {
     // Dispatch an action to update the Redux store
-    store.dispatch({ type: 'ADD_PRODUCT', payload: productData });
+    // store.dispatch({ type: 'ADD_PRODUCT', payload: productData });
   };
 
   // Subscribe to store changes to update local component state

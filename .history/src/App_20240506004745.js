@@ -42,7 +42,7 @@ const App = () => {
   }, []);
 
   // Subscribe to store changes to update local component state
-  // store.subscribe(() => setProducts(store.getState().products));
+  store.subscribe(() => setProducts(store.getState().products));
 
   const submitProduct = (productData) => {
     // Dispatch an action to update the Redux store

@@ -57,13 +57,14 @@ const InventoryForm = ({ onSubmit }) => {
     // If there's a file selected, append it to the FormData object
     const pictureInput = document.querySelector('#picture');
     if (pictureInput.files[0]) {
-      formData.append('images', pictureInput.files[0]);
+      formData.append('picture', pictureInput.files[0]);
     }
   
     try {
       // Make the HTTP request to your server endpoint
-      const response = await fetch('http://localhost:5000/api/products', {method: 'POST',
-        body: formData, 
+      const response = await fetch('/api/products', { // Adjust the URL to your specific endpoint
+        method: 'POST',
+        body: formData, // Send the FormData object as the request body
       });
   
       if (!response.ok) {
@@ -130,6 +131,7 @@ return (
               name="price"
               value={price}
               onChange={handleInputChange}
+              {...register("price", { required: true, min: 0 })}
               className="w-[520px] rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.price && (

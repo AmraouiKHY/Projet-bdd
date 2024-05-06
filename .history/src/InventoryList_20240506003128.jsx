@@ -37,16 +37,6 @@ const InventoryList = ({ products }) => {
                 <td className="font-bold text-[20px] px-4 py-2">
                   {product.description}
                 </td>
-                <td className="px-4 py-2">
-                  {/* Display only the first image */}
-                  {product.images && product.images.length > 0 && (
-                    <img
-                      src={`data:image/png;base64,${product.images[0].data}`}
-                      alt={product.name}
-                      className="w-20 h-20 object-cover"
-                    />
-                  )}
-                </td>
               </tr>
             ))}
           </tbody>

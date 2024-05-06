@@ -57,7 +57,7 @@ const InventoryForm = ({ onSubmit }) => {
     // If there's a file selected, append it to the FormData object
     const pictureInput = document.querySelector('#picture');
     if (pictureInput.files[0]) {
-      formData.append('images', pictureInput.files[0]);
+      formData.append('picture', pictureInput.files[0]);
     }
   
     try {

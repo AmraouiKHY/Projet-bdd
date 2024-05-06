@@ -27,22 +27,8 @@ const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    console.log("getting products");
-    const apiUrl = 'http://localhost:5000/api/products';
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach(product => {
-          store.dispatch({ type: 'ADD_PRODUCT', payload: product });
-        });
-      })
-      .catch((error) => {
-        console.error('Error fetching products:', error);
-      });
+    // Implement fetching of existing products (optional)
   }, []);
-
-  // Subscribe to store changes to update local component state
-  // store.subscribe(() => setProducts(store.getState().products));
 
   const submitProduct = (productData) => {
     // Dispatch an action to update the Redux store

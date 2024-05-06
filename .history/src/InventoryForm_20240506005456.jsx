@@ -15,6 +15,8 @@ const InventoryForm = ({ onSubmit }) => {
   const [price, setPrice] = useState(0.0);
   const [color, setColor] = useState("");
   const [description, setDescription] = useState("");
+  const [commentaire, setCommentaire] = useState("");
+  const [weight, setWeight] = useState(0.0);
   const [quantite, setQuantite] = useState(0.0);
 
   const handleInputChange = (event) => {
@@ -31,6 +33,12 @@ const InventoryForm = ({ onSubmit }) => {
         break;
       case "description":
         setDescription(value);
+        break;
+      case "commentaire":
+        setCommentaire(value);
+        break;
+      case "weight":
+        setWeight(parseFloat(value));
         break;
       case "quantite":
         setQuantite(parseFloat(value));
@@ -52,18 +60,21 @@ const InventoryForm = ({ onSubmit }) => {
     formData.append('price', price);
     formData.append('color', color);
     formData.append('description', description);
+    formData.append('commentaire', commentaire);
+    formData.append('weight', weight);
     formData.append('quantite', quantite);
   
     // If there's a file selected, append it to the FormData object
     const pictureInput = document.querySelector('#picture');
     if (pictureInput.files[0]) {
-      formData.append('images', pictureInput.files[0]);
+      formData.append('picture', pictureInput.files[0]);
     }
   
     try {
       // Make the HTTP request to your server endpoint
-      const response = await fetch('http://localhost:5000/api/products', {method: 'POST',
-        body: formData, 
+      const response = await fetch('/api/products', { // Adjust the URL to your specific endpoint
+        method: 'POST',
+        body: formData, // Send the FormData object as the request body
       });
   
       if (!response.ok) {
@@ -79,6 +90,8 @@ const InventoryForm = ({ onSubmit }) => {
       setPrice(0.0);
       setColor("");
       setDescription("");
+      setCommentaire("");
+      setWeight(0.0);
       setQuantite(0.0);
       if (pictureInput) {
         pictureInput.value = ''; // Reset file input
@@ -109,6 +122,7 @@ return (
               name="name"
               value={name}
               onChange={handleInputChange}
+              {...register("name", { required: true })}
               className="w-[520px] rounded-md border border-gray-300 px-2 py-1"
             />
             {errors.name && (
@@ -130,6 +144,7 @@ return (
               name="price"
               value={price}
               onChange={handleInputChange}
+              {...register("price", { required: true, min: 0 })}
               className="w-[520px] rounded-md border border-gray-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.price && (

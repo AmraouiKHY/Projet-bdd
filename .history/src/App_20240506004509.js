@@ -27,8 +27,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    console.log("getting products");
-    const apiUrl = 'http://localhost:5000/api/products';
+    const apiUrl = 'localhost:5000/api/products';
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -42,7 +41,7 @@ const App = () => {
   }, []);
 
   // Subscribe to store changes to update local component state
-  // store.subscribe(() => setProducts(store.getState().products));
+  store.subscribe(() => setProducts(store.getState().products));
 
   const submitProduct = (productData) => {
     // Dispatch an action to update the Redux store

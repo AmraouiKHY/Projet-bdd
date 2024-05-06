@@ -41,7 +41,7 @@ const InventoryList = ({ products }) => {
                   {/* Display only the first image */}
                   {product.images && product.images.length > 0 && (
                     <img
-                      src={`data:image/png;base64,${product.images[0].data}`}
+                      src={`data:image/png;base64,${product.images[0].images[0]}`}
                       alt={product.name}
                       className="w-20 h-20 object-cover"
                     />
