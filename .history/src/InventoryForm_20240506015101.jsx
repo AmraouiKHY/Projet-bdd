@@ -33,7 +33,7 @@ const InventoryForm = ({ onSubmit  , onProductsUpdated}) => {
         setDescription(value);
         break;
       case "quantite":
-        setQuantite(value === "" ? 0.0 : parseFloat(value));
+        setQuantite(parseFloat(value));
         break;
       default:
         break;

@@ -32,25 +32,48 @@ const reducer = (state = initialState, action) => {
 };
 const store = createStore(reducer, applyMiddleware(thunk));
 
-const fetchProducts = () => {
-  const apiUrl = 'http://localhost:5000/api/products';
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      store.dispatch({ type: 'CLEAR_PRODUCTS' }); // Clear existing products
-      data.forEach(product => {
-        store.dispatch({ type: 'ADD_PRODUCT', payload: product });
-      });
-    })
-    .catch((error) => {
-      console.error('Error fetching products:', error);
-    });
-};
-
 const App = () => {
   const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   console.log("getting products");
+  //   const apiUrl = 'http://localhost:5000/api/products';
+  //   fetch(apiUrl)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       data.forEach(product => {
+  //         store.dispatch({ type: 'ADD_PRODUCT', payload: product });
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching products:', error);
+  //     });
+  // }, []);
+
+  // // Subscribe to store changes to update local component state
+  // // store.subscribe(() => setProducts(store.getState().products));
+
+  // const submitProduct = (productData) => {
+  //   // Dispatch an action to update the Redux store
+  //   store.dispatch({ type: 'ADD_PRODUCT', payload: productData });
+  // };
+
+  // // Subscribe to store changes to update local component state
+  // store.subscribe(() => setProducts(store.getState().products));
   useEffect(() => {
-    fetchProducts();
+    console.log("getting products");
+    const apiUrl = 'http://localhost:5000/api/products';
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        store.dispatch({ type: 'CLEAR_PRODUCTS' }); // Clear existing products
+        data.forEach(product => {
+          store.dispatch({ type: 'ADD_PRODUCT', payload: product });
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching products:', error);
+      });
   }, []);
 
   useEffect(() => {
@@ -67,7 +90,7 @@ const App = () => {
   return (
     <div className="mx-auto px-4 py-8 ">
       <h1 className="text-center text-3xl font-bold mb-4">Inventory Management</h1>
-      <InventoryForm onSubmit={submitProduct} onProductsUpdated={fetchProducts} />
+      <InventoryForm onSubmit={submitProduct} />
       <InventoryList products={products} />
     </div>
   );
