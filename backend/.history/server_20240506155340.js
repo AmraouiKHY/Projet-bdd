@@ -111,6 +111,7 @@ app.post('/api/migrate', async (req, res) => {
 
     // Transform the data into a format suitable for MongoDB
     const transformedData = mysqlProducts.map(product => ({
+      _id: product.id,
       name: product.name,
       description: product.description,
       price: product.price,

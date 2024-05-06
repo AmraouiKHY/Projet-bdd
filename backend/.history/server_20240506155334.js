@@ -111,6 +111,7 @@ app.post('/api/migrate', async (req, res) => {
 
     // Transform the data into a format suitable for MongoDB
     const transformedData = mysqlProducts.map(product => ({
+      _id: product.id,
       name: product.name,
       description: product.description,
       price: product.price,
@@ -119,7 +120,7 @@ app.post('/api/migrate', async (req, res) => {
     }));
 
     // Insert the transformed data into MongoDB
-    await ProductSchema.insertMany(transformedData);
+    await Product.insertMany(transformedData);
 
     res.status(200).json({ message: 'Data migration completed successfully' });
   } catch (err) {
