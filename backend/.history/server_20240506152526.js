@@ -46,7 +46,6 @@ const upload = multer({ storage: storage });
 
 const authRoutes=require('./routes/authRoutes')
 
-app.use('/api/auth',authRoutes)
 
 app.post('/api/products', upload.array('images'), async (req, res) => {
   try {

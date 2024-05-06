@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const InventoryList = ({ products }) => {
 
@@ -11,19 +11,6 @@ const InventoryList = ({ products }) => {
   const closeImageModal = () => {
     setSelectedImage(null);
   };
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        closeImageModal();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    // Cleanup the event listener on component unmount
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
 
   return (
     <div className="mt-4">
@@ -77,17 +64,6 @@ const InventoryList = ({ products }) => {
           No products in inventory yet.
         </p>
       )}
-
-            {/* Image modal */}
-            {selectedImage && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-4">
-            <button onClick={closeImageModal}>Close</button>
-            <img src={`data:image/png;base64,${selectedImage}`} alt="Selected" className="w-full h-auto" />
-          </div>
-        </div>
-      )}
-
     </div>
   );
 };

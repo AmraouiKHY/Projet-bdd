@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const InventoryList = ({ products }) => {
 
@@ -11,19 +11,6 @@ const InventoryList = ({ products }) => {
   const closeImageModal = () => {
     setSelectedImage(null);
   };
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        closeImageModal();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    // Cleanup the event listener on component unmount
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
 
   return (
     <div className="mt-4">
@@ -87,7 +74,7 @@ const InventoryList = ({ products }) => {
           </div>
         </div>
       )}
-
+      
     </div>
   );
 };

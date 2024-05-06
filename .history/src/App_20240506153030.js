@@ -51,8 +51,6 @@ const fetchProducts = () => {
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
-
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -68,24 +66,11 @@ const App = () => {
     // Dispatch an action to update the Redux store
     store.dispatch({ type: 'ADD_PRODUCT', payload: productData });
   };
-
-  const handleLogin = (username, password) => {
-    // Here you would normally check the username and password against a database
-    // For simplicity, we'll just log the username and password and set isLoggedIn to true
-    console.log(`Logging in with username: ${username} and password: ${password}`);
-    setIsLoggedIn(true);
-  };
   return (
     <div className="mx-auto px-4 py-8 ">
       <h1 className="text-center text-3xl font-bold mb-4">Inventory Management</h1>
-      {isLoggedIn ? (
-        <>
-          <InventoryForm onSubmit={submitProduct} onProductsUpdated={fetchProducts} />
-          <InventoryList products={products} />
-        </>
-      ) : (
-        <LoginPage onLogin={handleLogin} />
-      )}
+      <InventoryForm onSubmit={submitProduct} onProductsUpdated={fetchProducts} />
+      <InventoryList products={products} />
     </div>
   );
 };

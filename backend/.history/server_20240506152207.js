@@ -44,10 +44,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const authRoutes=require('./routes/authRoutes')
-
-app.use('/api/auth',authRoutes)
-
 app.post('/api/products', upload.array('images'), async (req, res) => {
   try {
     const { name, description, price, color, quantity } = req.body;
@@ -103,7 +99,7 @@ app.post('/api/products', upload.array('images'), async (req, res) => {
   }
 });
 
-app.post('/api/migrate', async (req, res) => {
+app.get('/migrate', async (req, res) => {
   try {
     // Fetch all products from MySQL
     const mysqlProducts = await Product.findAll();

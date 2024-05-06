@@ -78,14 +78,8 @@ const App = () => {
   return (
     <div className="mx-auto px-4 py-8 ">
       <h1 className="text-center text-3xl font-bold mb-4">Inventory Management</h1>
-      {isLoggedIn ? (
-        <>
-          <InventoryForm onSubmit={submitProduct} onProductsUpdated={fetchProducts} />
-          <InventoryList products={products} />
-        </>
-      ) : (
-        <LoginPage onLogin={handleLogin} />
-      )}
+      <InventoryForm onSubmit={submitProduct} onProductsUpdated={fetchProducts} />
+      <InventoryList products={products} />
     </div>
   );
 };
